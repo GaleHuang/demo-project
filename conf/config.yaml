@@ -1,0 +1,7 @@
+db:
+  main:
+    addr: ${MAIN_DB_ADDR}
+    name: ${MAIN_DB_NAME}
+    user: ${MAIN_DB_USER}
+    password: ${MAIN_DB_PASSWD}
+    charset: utf8mb4
