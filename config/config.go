@@ -4,9 +4,13 @@ import (
 	"github.com/galehuang/demo-project/utils/yaml_util"
 )
 
+type RunConfig struct {
+	RunMode string
+}
+
 type Config struct {
 	DB DBConfig `yaml:"db"`
-
+	Run RunConfig
 }
 
 type DBConfig struct {
@@ -17,6 +21,7 @@ type MainDBConfig struct {
 	User string `yaml:"user"`
 	Password string `yaml:"password"`
 	Addr string `yaml:"addr"`
+	Port int64 `yaml:"port"`
 	Name string `yaml:"name"`
 	Charset string `yaml:"charset"`
 }

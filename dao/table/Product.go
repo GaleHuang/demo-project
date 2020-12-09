@@ -1,6 +1,9 @@
 package table
 
-import "gorm.io/gorm"
+import (
+	"github.com/galehuang/demo-project/services"
+	"gorm.io/gorm"
+)
 
 type ProductTable struct {
 	gorm.Model
@@ -10,14 +13,18 @@ type ProductTable struct {
 	Price float64
 }
 
-func (t ProductTable) Database()  {
-
+func (t ProductTable) TableName() string  {
+	return "tb_product"
 }
 
-func (t ProductTable) Table()  {
-
-}
 
 func (t ProductTable) QueryOneById(id int64) (*ProductTable, error)  {
-	return
+	result := services.GetSqlConn().First(&t, id)
+	return &t, result.Error
 }
+
+func (t ProductTable) InsertOne() (uint64, error)  {
+	result := services.GetSqlConn().Create(&t)
+	return t.Id, result.Error
+}
+
