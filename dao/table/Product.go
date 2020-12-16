@@ -36,7 +36,7 @@ func (t ProductTable) DeleteOne(id uint64) error  {
 }
 
 func (t ProductTable) InsertMany(tables []ProductTable) error{
-	return services.GetMainDB().Create(tables).Error
+	return services.GetMainDB().Create(&tables).Error
 }
 
 func (t ProductTable) SearchByNameOrDes(query string) (*[]ProductTable, error)  {
