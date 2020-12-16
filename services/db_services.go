@@ -2,12 +2,14 @@ package services
 
 import "gorm.io/gorm"
 
-var gSqlConn *gorm.DB
+var mainDB *gorm.DB
 
-func SetSqlConn(sqlConn *gorm.DB) {
-	gSqlConn = sqlConn
+func SetMainDB(db *gorm.DB)  {
+	mainDB = db
 }
 
-func GetSqlConn() *gorm.DB {
-	return gSqlConn
+func GetMainDB() *gorm.DB  {
+	return mainDB
 }
+
+

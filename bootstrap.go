@@ -2,24 +2,20 @@ package main
 
 import (
 	"fmt"
-	"github.com/astaxie/beego"
 	"github.com/galehuang/demo-project/config"
 	"github.com/galehuang/demo-project/services"
-	"google.golang.org/grpc/serviceconfig"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 // 初始化配置文件
 func init() {
-	runMode := beego.BConfig.RunMode
 	filePath := "./conf/config.yaml"
 	err := config.GetConfig().LoadConfigFromProfile(filePath)
 	if err != nil {
 		panic("init server configuration err=" + err.Error())
 		return
 	}
-	config.GetConfig().Run.RunMode = runMode
 }
 
 // 初始化数据库连接
@@ -32,5 +28,5 @@ func init() {
 		panic("init main database connection err=" + err.Error())
 		return
 	}
-	services.SetSqlConn(db)
+	services.SetMainDB(db)
 }

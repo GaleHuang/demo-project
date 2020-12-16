@@ -18,11 +18,29 @@ func (t ProductTable) TableName() string {
 }
 
 func (t ProductTable) QueryOneById(id int64) (*ProductTable, error) {
-	result := services.GetSqlConn().First(&t, id)
+	result := services.GetMainDB().First(&t, id)
 	return &t, result.Error
 }
 
 func (t ProductTable) InsertOne() (uint64, error) {
-	result := services.GetSqlConn().Create(&t)
+	result := services.GetMainDB().Create(&t)
 	return t.Id, result.Error
+}
+
+func (t ProductTable) UpdateOne() error  {
+	return services.GetMainDB().Updates(&t).Error
+}
+
+func (t ProductTable) DeleteOne(id uint64) error  {
+	return services.GetMainDB().Where("id = ?", id).Delete(&t).Error
+}
+
+func (t ProductTable) InsertMany(tables []ProductTable) error{
+	return services.GetMainDB().Create(tables).Error
+}
+
+func (t ProductTable) SearchByNameOrDes(query string) (*[]ProductTable, error)  {
+	result := make([]ProductTable, 0)
+	res := services.GetMainDB().Where("name Like ? or des Like ?", query, query).Find(&result)
+	return &result, res.Error
 }
