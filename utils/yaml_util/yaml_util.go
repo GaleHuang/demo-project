@@ -35,7 +35,7 @@ func ParseEnvFileStr(fileStr string) string {
 	envSet := NewEnvSet()
 
 	for _, env := range envStrings {
-		if envSet.Contains(env) {
+		if !envSet.Contains(env) {
 			fileStr = strings.Replace(fileStr, env, ParseEnvStrToValue(env), -1)
 			envSet.Add(env)
 		}

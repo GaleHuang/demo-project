@@ -38,8 +38,7 @@ func main() {
 	// 阻塞等待退出信号
 	// 搭配启动脚本 放在最后的"exec ./page-config-project"
 	sc := osutil.RegisterExistSignal()
-	sig := <-sc
-
+	_ = <-sc
 
 	wait := sync.WaitGroup{}
 	// 关闭grpc服务
