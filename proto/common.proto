@@ -1,0 +1,38 @@
+syntax = "proto3";
+package business;
+option go_package = "api/business";
+
+import "google/protobuf/descriptor.proto";
+extend google.protobuf.ServiceOptions {
+  optional EnumBusinessServiceName business_service_name = 50006;
+}
+
+enum EnumBusinessServiceName{
+  BusinessProductService = 0;
+}
+
+enum ErrorCode {
+  // 操作成功
+  Success = 0;
+  // 通用错误码(1~10000)
+  UnknownError = 1;
+  ParamError = 2;
+  NoAuthError = 3;
+  LogicError = 4;
+  DatabaseError = 5;
+  CacheError = 6;
+  ResultNotFoundError = 7;
+
+  // 模块自定义错误码(对应EnumWeTestServiceName的编号+1, 作为自定义错误码的万位)
+  // product
+  ProductNotExistsError = 10001;
+
+}
+
+message CommonRsp {
+  ErrorCode ret = 1;
+  string msg = 2;
+}
+
+message EmptyReq {
+}

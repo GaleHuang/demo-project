@@ -6,3 +6,6 @@ db:
     user: ${MAIN_DB_USER}
     password: ${MAIN_DB_PASSWD}
     charset: utf8mb4
+
+grpc:
+  address: ${GRPC_SERVER_ADDRESS}

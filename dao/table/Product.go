@@ -2,11 +2,9 @@ package table
 
 import (
 	"github.com/galehuang/demo-project/services"
-	"gorm.io/gorm"
 )
 
 type ProductTable struct {
-	gorm.Model
 	Id    uint64
 	Name  string
 	Des   string

@@ -1,0 +1,59 @@
+syntax = "proto3";
+package business;
+option go_package = "api/business";
+
+import "common.proto";
+
+message Product{
+
+  message ProductCreateReq{
+    string name = 1;    // 产品名称
+    string des = 2;     // 产品描述
+    float price = 3;    // 产品价格
+  }
+
+  message ProductListReq{
+    string query = 1;     // 查询（名称或描述）
+    float price_low = 2;  // 价格下限
+    float price_high = 3; // 价格上限
+  }
+
+  message ProductListRsp{
+    message ProductInfo{
+      int64 product_id = 1;
+      string name = 2;
+      string des = 3;
+      float price = 4;
+    }
+    message ProductListData{
+      repeated ProductInfo product_list = 1;
+    }
+    ErrorCode ret = 1;
+    string msg = 2;
+    ProductListData data = 3;
+  }
+
+  message ProductDeleteReq{
+    int64 product_id = 1;
+  }
+
+  message ProductUpdateReq{
+    int64 product_id = 1;
+    string name = 2;
+    string des = 3;
+    float price = 4;
+  }
+
+}
+
+service ProductService{
+  option (business_service_name) = BusinessProductService;
+  // 添加产品
+  rpc ProductCreate(Product.ProductCreateReq) returns (CommonRsp);
+  // 查询产品
+  rpc ProductList(Product.ProductListReq) returns (Product.ProductListRsp);
+  // 删除产品
+  rpc ProductDelete(Product.ProductDeleteReq) returns (CommonRsp);
+  // 更新产品
+  rpc ProductUpdate(Product.ProductUpdateReq) returns (CommonRsp);
+}

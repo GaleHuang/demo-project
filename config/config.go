@@ -11,6 +11,7 @@ type RunConfig struct {
 type Config struct {
 	DB  DBConfig `yaml:"db"`
 	Run RunConfig
+	GRPC GRPCConfig `yaml:"grpc"`
 }
 
 type DBConfig struct {
@@ -24,6 +25,10 @@ type MainDBConfig struct {
 	Port     int64  `yaml:"port"`
 	Name     string `yaml:"name"`
 	Charset  string `yaml:"charset"`
+}
+
+type GRPCConfig struct {
+	Address string `yaml:"address"`
 }
 
 var gConfig *Config
