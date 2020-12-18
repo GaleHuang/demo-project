@@ -6,6 +6,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-func RegisterRpcServices(server *grpc.Server)  {
+func RegisterRpcServices(server *grpc.Server) {
 	business.RegisterProductServiceServer(server, &rpcs.ProductServiceServerImpl{})
 }

@@ -3,3 +3,4 @@ conf/*.yml
 /test/
 .idea
 demo-project
+logs

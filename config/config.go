@@ -9,9 +9,10 @@ type RunConfig struct {
 }
 
 type Config struct {
-	DB  DBConfig `yaml:"db"`
-	Run RunConfig
+	DB   DBConfig `yaml:"db"`
+	Run  RunConfig
 	GRPC GRPCConfig `yaml:"grpc"`
+	Log LogConfig `yaml:"log"`
 }
 
 type DBConfig struct {
@@ -25,6 +26,10 @@ type MainDBConfig struct {
 	Port     int64  `yaml:"port"`
 	Name     string `yaml:"name"`
 	Charset  string `yaml:"charset"`
+}
+
+type LogConfig struct {
+	FileName string `yaml:"fileName"`
 }
 
 type GRPCConfig struct {

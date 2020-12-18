@@ -9,3 +9,6 @@ db:
 
 grpc:
   address: ${GRPC_SERVER_ADDRESS}
+
+log:
+  fileName: ${LOG_FILE_NAME}
