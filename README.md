@@ -1,5 +1,5 @@
 # demo-project
-Golang demo项目：基于Gin框架和Gorm框架
+Golang demo项目：基于Gin/Gorm/Beego/gRPC等框架
 
 ## 框架组件
 RPC: gRpc
