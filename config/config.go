@@ -12,7 +12,7 @@ type Config struct {
 	DB   DBConfig `yaml:"db"`
 	Run  RunConfig
 	GRPC GRPCConfig `yaml:"grpc"`
-	Log LogConfig `yaml:"log"`
+	Log  LogConfig  `yaml:"log"`
 }
 
 type DBConfig struct {

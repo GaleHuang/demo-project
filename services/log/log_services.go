@@ -43,7 +43,3 @@ func NewLogger(fileName string) (*Logger, error) {
 func SetLogger(logger *Logger) {
 	GLogger = logger
 }
-
-func GetLogger() *Logger {
-	return GLogger
-}

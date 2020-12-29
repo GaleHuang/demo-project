@@ -9,8 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
-
 // 初始化配置文件
 func init() {
 	filePath := "./conf/config.yaml"
@@ -22,10 +20,10 @@ func init() {
 }
 
 // 初始化日志服务
-func init()  {
+func init() {
 	logger, err := log.NewLogger(config.GetConfig().Log.FileName)
-	if err != nil{
-		panic("init log service err="+err.Error())
+	if err != nil {
+		panic("init log service err=" + err.Error())
 	}
 	log.SetLogger(logger)
 }

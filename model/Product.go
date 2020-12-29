@@ -18,34 +18,29 @@ func (ProductModel) CreateOne(name string, des string, price float64) (uint64, e
 	return productDao.InsertOne()
 }
 
-func (ProductModel) QueryByNameOrDesOrPrice(query string, priceLow float32, priceHigh float32) (*business.Product_ProductListRsp_ProductListData, error)  {
+func (ProductModel) QueryByNameOrDesOrPrice(query string, priceLow float32, priceHigh float32) (*business.Product_ProductListRsp_ProductListData, error) {
 	productList := make([]*business.Product_ProductListRsp_ProductInfo, 0)
-	res, err := dto.NewDtoFactory().CreateDto("product")
-	if err != nil{
+	productDto, err := dto.NewDtoFactory().CreateDto("product")
+	if err != nil {
 		return nil, err
 	}
-	productDto, _ := res.(dto.ProductDto)
+
 	var result *[]table.ProductTable
-	// priceLow和priceHigh为0时，不进行价格筛选
-	if priceLow == 0 && priceHigh == 0{
-		result, err = table.ProductTable{}.QueryByNameOrDes(query)
-		if err != nil{
-			return nil, err
-		}
-	}else{
-		result, err = table.ProductTable{}.QueryByPriceOrNameOrDes(query, priceLow, priceHigh)
-		if err != nil{
-			return nil, err
-		}
+	result, err = table.ProductTable{}.QueryByPriceOrNameOrDes(query, priceLow, priceHigh)
+	if err != nil {
+		return nil, err
 	}
-	for _, res := range *result{
-		productList = append(productList, productDto.TableToInfo(&res))
+
+	for _, res := range *result {
+		productInfo, err := productDto.TableToInfo(&res)
+		if err != nil {
+			return nil, err
+		}
+		productList = append(productList, productInfo.(*business.Product_ProductListRsp_ProductInfo))
 	}
 	data := &business.Product_ProductListRsp_ProductListData{ProductList: productList}
 	return data, nil
 }
-
-
 
 func (ProductModel) UpdateOne(id uint64, name string, des string, price float64) error {
 	productDao := table.ProductTable{
